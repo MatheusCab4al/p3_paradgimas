@@ -18,7 +18,7 @@ public class GUI {
 
         JFrame frame = new JFrame("📚 Livraria Digital");
         frame.setSize(500, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //para fechar aplicação
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null); // Centraliza na tela
 
