@@ -7,7 +7,6 @@ public class GUI {
     private JList<Publicacao> lista;
 
     public GUI() {
-        // Aplicar tema moderno
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
@@ -18,25 +17,39 @@ public class GUI {
 
         JFrame frame = new JFrame("📚 Livraria Digital");
         frame.setSize(500, 400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //para fechar aplicação
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setLocationRelativeTo(null); // Centraliza na tela
+        frame.setLocationRelativeTo(null);
 
-        // Título
         JLabel titulo = new JLabel("Sistema de Gerenciamento de Publicações", JLabel.CENTER);
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 18));
         titulo.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         frame.add(titulo, BorderLayout.NORTH);
 
-        // Lista de publicações
         listaModel = new DefaultListModel<>();
-        atualizarLista();
         lista = new JList<>(listaModel);
         lista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        // ListCellRenderer para múltiplas linhas
+        lista.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                          boolean isSelected, boolean cellHasFocus) {
+                JTextArea area = new JTextArea(value.toString());
+                area.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+                area.setWrapStyleWord(true);
+                area.setLineWrap(true);
+                area.setOpaque(true);
+                area.setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+                area.setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+                area.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                return area;
+            }
+        });
+
         JScrollPane scrollPane = new JScrollPane(lista);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Botões
         JButton adicionar = new JButton("➕ Adicionar");
         JButton editar = new JButton("✏️ Editar");
         JButton remover = new JButton("🗑️ Remover");
@@ -53,7 +66,6 @@ public class GUI {
         botoes.add(remover);
         frame.add(botoes, BorderLayout.SOUTH);
 
-        // Ações
         adicionar.addActionListener(e -> abrirFormulario(-1));
         editar.addActionListener(e -> {
             int i = lista.getSelectedIndex();
@@ -67,6 +79,7 @@ public class GUI {
             }
         });
 
+        atualizarLista();
         frame.setVisible(true);
     }
 

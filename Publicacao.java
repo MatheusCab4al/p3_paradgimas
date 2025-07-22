@@ -23,7 +23,9 @@ public abstract class Publicacao implements Serializable {
     public void setPreco(double preco) { this.preco = preco; }
 
     @Override
-    public String toString() {
-        return getTipo() + ": " + titulo + " - " + autor + " - R$ " + preco;
-    }
+public String toString() {
+    return "Título: " + titulo +
+           "\nAutor: " + autor +
+           "\nPreço: R$ " + String.format("%.2f", preco);
+}
 }
