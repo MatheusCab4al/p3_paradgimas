@@ -1,3 +1,5 @@
+Alunos:Matheus Cabral Santos ,Pedro Luís dos Santos Souza
+
 Gerenciador de Publicações
 
 Este projeto, desenvolvido em Java, implementa um sistema de gerenciamento de publicações (livros e revistas) com interface gráfica. O sistema aplica os principais conceitos da Programação Orientada a Objetos (POO), tais como herança, polimorfismo, encapsulamento e abstração.
